@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
 <script type="text/javascript">
-	var base_url = '<?=site_url()?>'
+	var base_url = '<?=site_url()?>';
 </script>
 
 </head>
