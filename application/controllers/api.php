@@ -41,7 +41,7 @@ class Api extends CI_Controller {
 
 
 	public function name_estado($id){
-		$estados = array('activo', 'inactivo');
+		$estados = array('inactivo', 'activo');
 		return $estados[$id];
 	}
 
@@ -51,10 +51,14 @@ class Api extends CI_Controller {
 		$this->load->view('welcome_message');
 	}
 
-	public function mascotas(){
+	public function mascotas($estado=''){
+
 
 		$res = array();
 
+	if($estado!=''){
+	$this->db->where('estado', $estado);	
+	}	
 
 	$data = $this->db->get('mascotas')->result();
 	

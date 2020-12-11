@@ -21,14 +21,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <h1>Gestion mascota</h1>
 
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mascotaModal">
-Agregar mascota</button>
 
 <div id="app" class="container">
+<div class="row">
+	<div class="col-md-6">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mascotaModal">
+Agregar mascota</button></div>
+	<div class="col-md-6"><select id="sfilter" class="form-control">
+<option value="">Filtrar Todas</option>
+<option value="1">Activas</option>
+<option value="0">Inactivas</option>
+</select>
+</div>
+</div>
+<br>
 
 
-<br>	
-
+<br>
 <table class="table">
 	<thead>
 	<th>#</th>
@@ -89,7 +98,11 @@ Agregar mascota</button>
 	$(document).ready(function($){
 	
 
+$('#sfilter').change(function(){
 
+app.get_mascotas($(this).val())
+
+})
 
 
 	//formulario
@@ -221,11 +234,16 @@ app.get_mascotas()
 			},500);
 
 			},
-			get_mascotas: function(){
-				console.log("get rr mas")
+			get_mascotas: function(filtro = ''){
+				console.log("get rr mas", filtro)
+				var flt = '';
+				if(filtro != "" ){
+					flt = filtro.toString();
+				}else{
+					flt = '';
+				}
 
-
-	axios.get("http://localhost/ciapi/index.php/api/mascotas").then(response => (this.mascotas = response.data));
+	axios.get("http://localhost/ciapi/index.php/api/mascotas/"+flt).then(response => (this.mascotas = response.data));
 
 			}
 		}
