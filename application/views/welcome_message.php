@@ -16,6 +16,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
+<script type="text/javascript">
+	var base_url = '<?=site_url()?>'
+</script>
+
 </head>
 <body>
 <h1>Gestion mascota</h1>
@@ -135,7 +139,7 @@ app.get_mascotas($(this).val())
 
 
 
-$.post("http://localhost/ciapi/index.php/api/save", form_data).then(function (response) {
+$.post(base_url+"/api/save", form_data).then(function (response) {
  console.log(response); 
 
 $('#fmas')[0].reset()
@@ -200,7 +204,7 @@ var mascota_inst = new Vue({el:'#frm'})
 			borrarMascota:function(mascota){
 
 
-$.get("http://localhost/ciapi/index.php/api/delete/"+mascota.id).then(function (response) {
+$.get(base_url+"/api/delete/"+mascota.id).then(function (response) {
  console.log(response); 
 
 app.get_mascotas()
@@ -243,7 +247,7 @@ app.get_mascotas()
 					flt = '';
 				}
 
-	axios.get("http://localhost/ciapi/index.php/api/mascotas/"+flt).then(response => (this.mascotas = response.data));
+	axios.get(base_url+"/api/mascotas/"+flt).then(response => (this.mascotas = response.data));
 
 			}
 		}
